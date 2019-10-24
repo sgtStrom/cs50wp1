@@ -1,0 +1,76 @@
+{% extends "_layout.html" %}
+
+{% block title %}Book details{% endblock %}
+
+{% block main %}
+<h4>Book info</h4>
+<dl class="row">
+    <dt class="col-md-3">Title</dt>
+    <dd class="col-md-9">{{ book.title }}</dd>
+
+    <dt class="col-md-3">Author</dt>
+    <dd class="col-md-9">{{ book.author }}</dd>
+
+    <dt class="col-md-3">Publication year</dt>
+    <dd class="col-md-9">{{ book.year }}</dd>
+
+    <dt class="col-md-3">ISBN</dt>
+    <dd class="col-md-9">{{ book.isbn }}</dd>
+</dl>
+
+<h4>Reviews</h4>
+{% if reviews %}
+<table class="table table-striped">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">Author</th>
+        <th scope="col">Rating</th>
+        <th scope="col">Review</th>
+      </tr>
+      <tbody>
+      {% for review in reviews %}
+        <tr>
+          <td>{{ review.name }}</td>
+          <td>{{ review.rating }}</td>
+          <td>{{ review.review }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </thead>
+</table>
+{% else %}
+<p>
+    <strong>There are no reviews yet</strong>
+</p>
+{% endif %}
+
+{% if gr_data %}
+<h4>Goodreads rating</h4>
+<p><strong>GoodRead average rating: {{ gr_data.average_rating }}</strong></p>
+<p><strong>GoodRead number of ratings: {{ gr_data.work_ratings_count }}</strong></p>
+{% endif %}
+
+{% if not logged_in %}
+<p><strong>You must log in to submit a review</strong></p>
+{% elif already_submit %}
+{% else %}
+<h4>Your review</h4>
+<form action="{{ url_for('book', book_id=book.id) }}" method="post">
+  <div class="form-group">
+      <label for="input-rating">Choose your rating</label>
+      <select id="input-rating" class="form-control" name="rating">
+        <option selected>5</option>
+        <option>4</option>
+        <option>3</option>
+        <option>2</option>
+        <option>1</option>
+      </select>
+    </div>
+  <div class="form-group">
+    <label for="input-review">Submit a review</label>
+    <textarea class="form-control" id="input-review" name="review" rows="5" placeholder="Type your review here" required></textarea>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% endif %}
+{% endblock %}

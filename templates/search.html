@@ -1,0 +1,45 @@
+{% extends "_layout.html" %}
+
+{% block title %}Search{% endblock %}
+
+{% block main %}
+{% if user_id %}
+<form action="{{ url_for('search') }}" method="get">
+  <div class="form-group">
+    <label for="input-query">Search query</label>
+    <input type="search" class="form-control" id="input-query" name="query" placeholder="Enter your search query" required>
+  </div>
+  <button type="submit" class="btn btn-primary">Search</button>
+</form>
+{% else %}
+<p>
+    <strong>You must log in to use the search</strong>
+</p>
+{% endif %}
+{% if has_query %}
+  {% if result %}
+    <table class="table table-striped">
+      <thead class="thead-light">
+        <tr>
+          <th scope="col">ISBN</th>
+          <th scope="col">Title</th>
+          <th scope="col">Author</th>
+          <th scope="col">Year</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for item in result %}
+        <tr>
+          <th scope="row"><a href="{{ url_for('book', book_id=item.id) }}">{{ item.isbn }}</a></th>
+          <td>{{ item.title }}</td>
+          <td>{{ item.author }}</td>
+          <td>{{ item.year }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+  <h4>No books found</h4>
+  {% endif %}
+{% endif %}
+{% endblock %}
