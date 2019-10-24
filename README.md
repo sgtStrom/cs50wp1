@@ -20,16 +20,16 @@ Alright, it’s time to actually build your web application! Here are the requir
   - Review Submission: On the book page, users should be able to submit a review: consisting of a rating on a scale of 1 to 5, as well as a text component to the review where the user can write their opinion about a book. Users should not be able to submit multiple reviews for the same book.
   - Goodreads Review Data: On your book page, you should also display (if available) the average rating and number of ratings the work has received from Goodreads.
   - API Access: If users make a GET request to your website’s /api/<isbn> route, where <isbn> is an ISBN number, your website should return a JSON response containing the book’s title, author, publication date, ISBN number, review count, and average score. The resulting JSON should follow the format:
-
-    {
-        "title": "Memory",
-        "author": "Doug Lloyd",
-        "year": 2015,
-        "isbn": "1632168146",
-        "review_count": 28,
-        "average_score": 5.0
-    }
-
+```
+        {
+            "title": "Memory",
+            "author": "Doug Lloyd",
+            "year": 2015,
+            "isbn": "1632168146",
+            "review_count": 28,
+            "average_score": 5.0
+        }
+```
 If the requested ISBN number isn’t in your database, your website should return a 404 error.
 
   - You should be using raw SQL commands (as via SQLAlchemy’s execute method) in order to make database queries. You should not use the SQLAlchemy ORM (if familiar with it) for this project.
@@ -50,18 +50,18 @@ This project includes two Python scripts:
 - `import.py`. It saves all data from books.csv into the database.
 
 There are three directories in the project:
-- schemas - contains database's tables schemas
-- static - contains all static files used in project. It in turn contains four subdirectories:
- - images - just one image for a header
- - scripts - contains javascript file for validating passwords
- - style-css - CSS file
- - style-scss - SCSS file
-- templates - templates used in the project
- - layout.html - base HTML templates
- - book.html - book details page
- - index.html - main page
- - login.html - login page
- - register.html - register page
- - search.html - search page.
+  - schemas - contains database's tables schemas
+  - static - contains all static files used in project. It in turn contains four subdirectories:
+    - images - just one image for a header
+    - scripts - contains javascript file for validating passwords
+    - style-css - CSS file
+    - style-scss - SCSS file
+  - templates - templates used in the project
+    - layout.html - base HTML templates
+    - book.html - book details page
+    - index.html - main page
+    - login.html - login page
+    - register.html - register page
+    - search.html - search page.
 
 The project's video: https://www.youtube.com/watch?v=onckguR2GCk
